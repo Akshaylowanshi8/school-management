@@ -1,3 +1,4 @@
+const{ School ,Class ,Subject,Teacher, Manage}= require("../models")
 
 const process = require('process');
 const bcrypt = require('bcrypt');
@@ -42,12 +43,32 @@ const loginAdminUser= async(req,res)=>{
  console.log(email);
  try {
 // console.log(Email);
-     await User.findOne( { where: { email : email }}).then(resp => {
+     await User.findOne( { where: { email : email }}).then (async resp => {
       if(resp){
    const isMatch =  bcrypt.compare(password, resp.password);
         if (isMatch) {
           const token = jwt.sign({ username: resp.username }, process.env.JWTSECRET, { expiresIn: '1h' });
-          res.render( "home" ,{ token });
+
+
+          const data=  await Manage.findAll(  {
+            include:[{
+                model:School,
+                
+            }, {
+                model:Class,
+                
+            },{
+                model:Teacher,
+                
+            }, {
+                model:Subject,
+                
+            },]
+        })
+res.render('home'
+    ,{data:data},
+)
+
         } else {
             res.render( 'index' , {message :"Password is invalid!", }) 
         }
