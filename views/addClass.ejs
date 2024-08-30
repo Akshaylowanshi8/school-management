@@ -1,0 +1,202 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>school</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<%- include("include/header");-%>
+<body>
+<style>
+.form {
+    margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 450px;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0px 0px 1px 2px ;
+}
+
+.title {
+  font-size: 20px;
+  color: royalblue;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+}
+
+.title::before,.title::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: royalblue;
+}
+
+.title::before {
+  width: 18px;
+  height: 18px;
+  background-color: royalblue;
+}
+
+.title::after {
+  width: 18px;
+  height: 18px;
+  animation: pulse 1s linear infinite;
+}
+
+.message, .signin {
+  color: rgba(88, 87, 87, 0.822);
+  font-size: 14px;
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a {
+  color: royalblue;
+}
+
+.signin a:hover {
+  text-decoration: underline royalblue;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.form label {
+  position: relative;
+}
+
+.form label .input {
+  width: 100%;
+  padding: 10px 10px 20px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+}
+
+.form label .input + span {
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  color: grey;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+  top: 15px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,.form label .input:valid + span {
+  top: 0px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.form label .input:valid + span {
+  color: green;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  background-color: royalblue;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+}
+
+.submit:hover {
+  background-color: rgb(56, 90, 194);
+  cursor: pointer;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+select{
+padding: 5px;
+border-radius: 5px;
+background-color: #fff;
+}
+option{
+padding: 5px ;
+}
+</style>
+
+
+<div   style="display:flex ; height: auto; justify-content: center;">
+
+
+    <form class="form"  method="post" action="/Class/newClass">
+        <p class="title">Register  New Class  </p>
+           
+        <label>
+          <label for="optionSelect">Choose an Class:</label>
+          <select id="optionSelect" name="name">
+              <option value="1st">1st</option>
+              <option value="2nd">2nd</option>
+              <option value="3rd">3rd</option>
+              <option value="4th">4th</option>
+              <option value="5th">5th</option>
+              <option value="6th">6th</option>
+              <option value="7th">7th</option>   
+              <option value="8th">8th</option>
+              <option value="9th">9th</option>
+              <option value="10th">10th</option>   
+              <option value="11th">11th</option>
+              <option value="12th">12th</option>   
+              <option value="LKG">LKG</option>
+              <option value="KG1">KG1</option>
+          </select>
+            <span>Class Name</span>
+        </label>
+        <label for="schoolId">Choose a schoolName</label>
+            <select name="schoolId" id="schoolId">
+                     <%data.forEach((e) => {%>
+                    <option value="<%=e.id%>"><%=e.schoolName%></option>
+                     <% }) %>
+              </select>
+        
+        <button class="submit" type="submit">Submit</button>
+        <p class="signin"> <a href="/class/display">Back</a> </p>
+    </form>
+    
+</div>
+</html>
+

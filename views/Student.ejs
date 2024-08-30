@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style>
+
+        #cont{
+
+            display: flex;
+            justify-content: center;
+        }
+      table {
+
+ font-family: arial, sans-serif;
+ border-collapse: collapse;
+ width: 90%;
+}
+td, th {
+ border: 1px solid #dddddd;
+ text-align: left;
+ padding: 8px;
+}
+tr:nth-child(even) {
+ background-color: #dddddd;
+}
+
+.table-wrapper{
+   display: flex ;
+   justify-content: center;
+}
+        .nested-table {
+            width: 100%;
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nested-table td {
+            border: none;
+            padding: 5px;
+        }
+        .nested-table th {
+            background-color: #e0e0e0;
+        }
+        .nested-table-container {
+            display: none; /* Hide by default */
+        }
+        .nested-table-container.show-details {
+            display: table; /* Show when class is added */
+        }
+
+
+        .uiverse {
+  position: relative;
+  background: #ffffff;
+  color: #000;
+  padding: 15px;
+  margin: 10px;
+  margin-left: 100px;
+  border-radius: 10px;
+  width: 150px;
+  height: 50px;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip {
+
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #ffffff;
+  color: #ffffff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #04eb78;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.uiverse:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+svg:hover span,
+svg:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.uiverse:hover,
+.uiverse:hover .tooltip,
+.uiverse:hover .tooltip::before {
+  background: linear-gradient(320deg, rgb(3, 77, 146), rgb(0, 60, 255));
+  color: #ffffff;
+}
+    </style>
+</head>
+<body>
+<%- include("include/header");-%>
+
+
+<h1 style="text-align: center;" >Students List</h1>
+
+<div class="uiverse">
+    <span class="tooltip">Add new student </span>
+    <span>
+        <a href="/student/addStudent">Add</a>
+    </span>
+</div>
+
+
+    <div  id="cont">   
+
+
+
+
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>class</th>
+                <th>School Details</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% data.forEach(student => { %>
+                <tr class="student-row">
+                    <td><%= student.id %></td>
+                    <td><%= student.firstName %></td>
+                    <td><%= student.lastName %></td>
+                    <td><%= student.email %></td>
+                    <td><%= student.address %></td>
+                    <td><%= student.Class.name%></td>
+
+
+                    <td>
+                        <button class="toggle-details">Show Details</button>
+                        <div class="nested-table-container">
+                            <table class="nested-table">
+                                <thead>
+                                    <tr>
+                                        <th>School Name</th>
+                                        <th>School Address</th>
+                                        <th>School Email</th>
+                                        <th>School Phone Number</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><%= student.School.schoolName %></td>
+                                        <td><%= student.School.address %></td>
+                                        <td><%= student.School.schoolEmail %></td>
+                                        <td><%= student.School.phoneNumber %></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+
+
+                  <td > <a  style="background-color: red ;padding: 8px;  box-shadow: 0px 1px 1px 1px ;"  href="/student/delete/<%=student.id%>"> <i style="color:white;" class="fa-solid fa-trash">  Delete</i></a> 
+
+                <a  style="background-color: rgb(25, 145, 25) ;padding: 8px;  box-shadow: 0px 1px 1px 1px ;"  href="/student/update/<%=student.id%>"> <i class="fa-regular fa-pen-to-square" style="color: #fff;">update</i></a>
+
+
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <script>
+
+        
+        document.querySelectorAll('.toggle-details').forEach(button => {
+            button.addEventListener('click', () => {
+                const container = button.nextElementSibling;
+                container.classList.toggle('show-details');
+                button.textContent = container.classList.contains('show-details') ? 'Hide Details' : 'Show Details';
+            });
+        });
+    </script>
+        
+    </div>
+
+
+    <%- include("include/footer");-%>
+
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+
+<div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+    <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+    <a href="/system/home" class="w3-bar-item w3-button">home</a>
+    <a href="/school/display" class="w3-bar-item w3-button">School</a>
+    <a href="/student/display"class="w3-bar-item w3-button">students</a>
+    <a href="/class/display" class="w3-bar-item w3-button">classes</a>
+    <a href="/teacher/display" class="w3-bar-item w3-button">Teachers</a>
+    <a href="/subject/display" class="w3-bar-item w3-button">subjects</a>
+  </div>
+  <div class="w3-teal">
+    <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+    <div style="width: 100% ;" class="w3-container">
+      <h1>welcome school management  </h1>
+    </div>
+  </div>
+  <script>
+    function w3_open() {
+      document.getElementById("mySidebar").style.display = "block";
+    }
+    function w3_close() {
+      document.getElementById("mySidebar").style.display = "none";
+    }
+    </script>
