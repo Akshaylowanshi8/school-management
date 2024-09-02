@@ -4,7 +4,7 @@ const subjectController = require('../controllers/subjectController')
 
 
 
-router.get('/display',subjectController.GetAllSubject)
+router.get('/display',subjectController.getAllSubject)
 router.get("/delete/:id",subjectController.deleteSubject);
 router.get('/addSubject',subjectController.addSubject)
 router.post('/newSubject',subjectController.newSubject)

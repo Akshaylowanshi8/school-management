@@ -9,7 +9,7 @@
 
 
 </head>
-<%- include("include/header");-%>
+<%- include("../include/header");-%>
 <body>
 <style>
 .form {
@@ -151,33 +151,16 @@
 
 <div   style="display:flex ; height: auto; justify-content: center;">
 
-
-
-<form class="form"  method="post" action="/school/newSchool">
-    <p class="title">Register  New school   </p>
-        <label>
-            <input class="input" type="text" name="schoolName" placeholder="" required="">
-            <span>School Name</span>
-        </label>
-    
-            
+<form class="form"  method="post" action="/subject/newSubject">
+    <p class="title">Register  New subject   </p>
+      
     <label>
-        <input class="input" type="email" name="schoolEmail" placeholder="" required="">
-        <span>Email</span>
-    </label> 
-        
-    <label>
-        <input class="input" type="text" name="address" placeholder="" required="">
-        <span>Address</span>
-    </label>
-    <label>
-        <input class="input" type="text" name="phoneNumber" placeholder="" required="">
-        <span>PhoneNumber</span>
+        <input class="input" type="text" name="name" placeholder="" required="">
+        <span>Name</span>
     </label>
     <button class="submit" type="submit">Submit</button>
-    <p class="signin"> <a href="/school/display">Back</a> </p>
+    <p class="signin"> <a href="/subject/display">Back</a> </p>
 </form>
 
-    
 </div>
 </html>

@@ -13,8 +13,8 @@ const {Class ,School}= require("../models");
                 }
             }
             )
-            res.status(200).render('class' ,{data:classdata})
-            console.log(JSON.stringify(classdata, null, 2)); 
+            res.status(200).render('classPages/class' ,{data:classdata})
+            // console.log(JSON.stringify(classdata, null, 2)); 
 
 
         } catch (error) {
@@ -35,17 +35,7 @@ const {Class ,School}= require("../models");
           });
           console.log(data);
           if (data === 1) {
-            const classData = await Class.findAll(
-    
-                {
-                    include:{
-                        model:School,
-                        
-                    }
-                }
-            )
-            console.log(classData);
-            res.status(200).render('class',{ data:classData}) 
+            res.status(200).redirect("/class/display")
           }
           return res.status(200).render('class' )
       } catch (error) {
@@ -53,29 +43,18 @@ const {Class ,School}= require("../models");
       }}
       const addClass=async(req,res)=>{
         const school=  await School.findAll()
-        res.render('addclass' ,{data:school})
+        res.render('classPages/addclass' ,{data:school})
       }
 
 
-      const   newClass = async(req,res)=>{
+      const newClass = async(req,res)=>{
         console.log(req.body);
     
         try {
             const data= await Class.create(req.body)
     
             if(data){
-    
-                const classData = await Class.findAll(
-    
-                    {
-                        include:{
-                            model:School,
-                            
-                        }
-                    }
-                )
-                console.log(classData);
-                res.status(200).render('class',{ data:classData}) 
+            res.status(200).redirect("/class/display")
                } 
             }
     

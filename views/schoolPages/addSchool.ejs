@@ -9,7 +9,7 @@
 
 
 </head>
-<%- include("include/header");-%>
+<%- include("../include/header");-%>
 <body>
 <style>
 .form {
@@ -153,22 +153,16 @@
 
 
 
-<form class="form"  method="post" action="/student/newStudent">
-    <p class="title">Register  New student  </p>
-    <div class="flex">
+<form class="form"  method="post" action="/school/newSchool">
+    <p class="title">Register  New school   </p>
         <label>
-            <input class="input" type="text" placeholder="" name="firstName" required="">
-            <span>Firstname</span>
+            <input class="input" type="text" name="schoolName" placeholder="" required="">
+            <span>School Name</span>
         </label>
-
-        <label>
-            <input class="input" type="text" placeholder="" name="lastName" required="">
-            <span>Lastname</span>
-        </label>
-    </div>  
+    
             
     <label>
-        <input class="input" type="email" name="email" placeholder="" required="">
+        <input class="input" type="email" name="schoolEmail" placeholder="" required="">
         <span>Email</span>
     </label> 
         
@@ -176,32 +170,12 @@
         <input class="input" type="text" name="address" placeholder="" required="">
         <span>Address</span>
     </label>
-   
-
-    <label for="cars">Choose a schoolName</label>
-     
-
-        <select name="schoolId" id="schoolId">
-                 <%data.forEach((e) => {%>
-                <option value="<%=e.id%>"><%=e.schoolName%></option>
-                 <% }) %>
-          </select>
-       
-
-    <label for="class">Choose a class</label>
-     
-    <select name="classId" id="classId">
-             <%data1.forEach((e) => {%>
-            <option value="<%=e.id%>"><%=e.name%></option>
-             <% }) %>
-      </select>
-
-     
-    
-   
-
+    <label>
+        <input class="input" type="text" name="phoneNumber" placeholder="" required="">
+        <span>PhoneNumber</span>
+    </label>
     <button class="submit" type="submit">Submit</button>
-    <p class="signin"> <a href="/student/display">Back</a> </p>
+    <p class="signin"> <a href="/school/display">Back</a> </p>
 </form>
 
     

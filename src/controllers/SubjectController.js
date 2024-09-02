@@ -1,10 +1,10 @@
 
 const {Student ,School,Subject}= require("../models");
 
-const GetAllSubject=async(req,res)=>{
+const getAllSubject=async(req,res)=>{
     try {
      const subData = await Subject.findAll()
-        res.status(200).render('subject',{ data:subData}) 
+        res.status(200).render('subjectPages/subject',{ data:subData}) 
        } 
     catch (error) {
         console.log(error);
@@ -22,8 +22,7 @@ const    deleteSubject=async(req,res)=>{
       });
       console.log(data);
       if (data === 1) {
-        const SubjectData = await Subject.findAll()
-        res.status(200).render('subject',{ data:SubjectData}) 
+        res.status(200).redirect('subject/display') 
       }
   } catch (error) {
     console.log(error);
@@ -31,7 +30,7 @@ const    deleteSubject=async(req,res)=>{
   }
 
   const addSubject=async(req,res)=>{
-    res.render('addSubject')
+    res.render('subjectPages/addSubject')
 
 }
 
@@ -40,9 +39,8 @@ const    deleteSubject=async(req,res)=>{
     try {
         const data= await Subject.create(req.body)
         if(data){
+          res.status(200).redirect('subject/display') 
 
-            const SubjectData = await Subject.findAll()
-            res.status(200).render('subject',{ data:SubjectData}) 
            } 
         }
 
@@ -52,7 +50,7 @@ const    deleteSubject=async(req,res)=>{
   }
 
 module.exports={
-    GetAllSubject,
+    getAllSubject,
     deleteSubject,
     addSubject,
     newSubject

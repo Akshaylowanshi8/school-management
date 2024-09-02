@@ -9,7 +9,7 @@
 
 
 </head>
-<%- include("include/header");-%>
+<%- include("../include/header");-%>
 <body>
 <style>
 .form {
@@ -153,44 +153,44 @@
 
 
 
-<form class="form"  method="post" action="/student/saveUpdateStudent">
-    <p class="title">update student   </p>
-    <div class="flex">
+<form class="form"  method="post" action="/teacher/newTeacher">
+    <p class="title">Register  New teacher  </p>
+    
         <label>
-            <input type="text" name="id" value="<%=Alldata.id%>">
-            <input class="input" type="text" placeholder="" name="firstName" value="<%=Alldata.firstName %>" required="">
-            <span>Firstname</span>
+            <input class="input" type="text" placeholder="" name="name" required="">
+            <span>name</span>
         </label>
-
-        <label>
-            <input class="input" type="text" value="<%= Alldata.lastName %>" placeholder="" name="lastName" required="">
-            <span>Lastname</span>
-        </label>
-    </div>  
-            
-    <label>
-        <input class="input" type="email" value="<%=Alldata.email%>" name="email" placeholder="" required="">
+     <label>
+        <input class="input" type="email" name="email" placeholder="" required="">
         <span>Email</span>
     </label> 
         
     <label>
-        <input class="input" type="text" value="<%=Alldata.address%>" name="address" placeholder="" required="">
+        <input class="input" type="text" name="address" placeholder="" required="">
         <span>Address</span>
     </label>
    
-   
-    <label for="cars"> your old School is "<%=Alldata.School.schoolName%>" Choose a schoolName</label>
-     
 
+    <label for="cars">Choose a schoolName</label>
+    
         <select name="schoolId" id="schoolId">
                  <%data.forEach((e) => {%>
                 <option value="<%=e.id%>"><%=e.schoolName%></option>
                  <% }) %>
           </select>
       
+          <label for="cars">Choose a className</label>
+    
+        <select name="classId" id="classId">
+                 <%data1.forEach((e) => {%>
+                <option value="<%=e.id%>"><%=e.name%></option>
+                 <% }) %>
+          </select>
+      
+
 
     <button class="submit" type="submit">Submit</button>
-    <p class="signin"> <a href="/student/display">Back</a> </p>
+    <p class="signin"> <a href="/teacher/display">Back</a> </p>
 </form>
 
     

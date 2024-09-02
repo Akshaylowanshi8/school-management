@@ -6,7 +6,7 @@ const {User }= require('../models');
 
 const jwt = require('jsonwebtoken');
 
-const  CreateAdminUser=async(req,res)=>{
+const  createAdminUser=async(req,res)=>{
       let  fullName  =req.body.fullName; 
       let  email =req.body.email ;
       let  bPassword = req.body.password ;
@@ -86,6 +86,6 @@ res.render('home'
 
 module.exports={
 
-    CreateAdminUser,
+    createAdminUser,
     loginAdminUser
 }

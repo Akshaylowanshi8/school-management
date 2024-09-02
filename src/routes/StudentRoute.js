@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const studentController =require('../controllers/studentController');
 
-router.get('/display',studentController.GetAllStudentData)
+router.get('/display',studentController.getAllStudentData)
 router.get("/delete/:id",studentController.deleteStudent);
 router.get('/addStudent',studentController.addStudent)
 router.get("/update/:id",studentController.updateStudent);

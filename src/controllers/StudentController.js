@@ -5,37 +5,34 @@ const {Student ,Class,School}= require("../models");
 // get All student data
 
 
-const GetAllStudentData=async(req,res)=>{
+const getAllStudentData=async(req,res)=>{
     try {
 
         const studentData = await Student.findAll(
-
             {
                 include:[{
                     model:School,
                     
                 },
-        
-            {
-                
+                { 
                 model:Class,
                     
                 }]
             }
             
         )
-        console.log(studentData);
-        res.status(200).render('student',{ data:studentData}) 
+        // console.log(studentData);
+        res.status(200).render('studentPages/student',{ data:studentData}) 
        } 
     catch (error) {
-        console.log(error);
+        // console.log(error);
         res.send(error)
     }
 }
 
 
 
-const    deleteStudent=async(req,res)=>{
+const  deleteStudent=async(req,res)=>{
     try {
       const id=req.params.id;
       console.log(id);
@@ -44,36 +41,22 @@ const    deleteStudent=async(req,res)=>{
               id: id
           }
       });
-      console.log(data);
+    //   console.log(data);
       if (data === 1) {
-        const studentData = await Student.findAll(
-
-            {
-                include:[{
-                    model:School,
-                    
-                },{
-
-                    model:Class
-                }]
-            }
-        )
-        console.log(studentData);
-        res.status(200).render('student',{ data:studentData}) 
+      
+        res.status(200).redirect("/student/display") 
       }
-      return res.status(200).render('student' )
+      return res.status(200).render('studentPages/student' )
   } catch (error) {
     console.log(error);
   }
   }
 
-
-
   const addStudent=async(req,res)=>{
 try {
        const school=  await School.findAll()
      const data = await Class.findAll()
-    res.render('addStudent' ,{data:school ,data1:data  })
+    res.render('studentPages/addStudent' ,{data:school ,data1:data  })
 } catch (error) {
     res.send(error)
 }
@@ -88,23 +71,8 @@ try {
         const data= await Student.create(req.body)
 
         if(data){
+            res.status(200).redirect("/student/display") 
 
-            const studentData = await Student.findAll(
-
-                {
-                    include:[{
-                        model:School,
-                        
-                    },  
-                     {
-                            model:Class,
-                            
-                        }
-                    ]
-                }
-            )
-            console.log(studentData);
-            res.status(200).render('student',{ data:studentData}) 
            } 
         }
 
@@ -114,7 +82,7 @@ try {
   }
   const updateStudent=async(req,res)=>{
     const id=req.params.id;
-    console.log(id);
+    // console.log(id);
 
     const studentData = await Student.findOne(
 
@@ -128,7 +96,7 @@ try {
         }
     )
     const school=  await School.findAll()
-    res.render('updateStudent' ,{data :school,Alldata:studentData} )
+    res.render('studentPages/updateStudent' ,{data :school,Alldata:studentData} )
   }
 
 
@@ -141,21 +109,9 @@ try {
         where:{id:id}
       }
       )
-      if(student){
-
-
-      
-    const studentData =  await Student.findAll(
-
-        {
-            include:{
-                model:School,
-                
-            }
-        }
-    )
-    console.log(studentData);
-    res.status(200).render('student',{ data:studentData}) 
+      if(student){ 
+        res.status(200).redirect("/student/display") 
+  
 }
      } catch (error) {
         console.log(error);
@@ -167,7 +123,7 @@ try {
    
     }
 module.exports={
-    GetAllStudentData,
+    getAllStudentData,
     deleteStudent,
     addStudent,
     newStudent,

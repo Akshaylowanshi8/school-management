@@ -18,7 +18,7 @@ router.get("/signin",(req,res)=>{
 
 })
 router.post("/login",adminController.loginAdminUser);
-router.post('/CreateAdminUser', adminController.CreateAdminUser)
+router.post('/CreateAdminUser', adminController.createAdminUser)
 
 
 module.exports=router

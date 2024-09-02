@@ -9,11 +9,11 @@ const  findAllSchools= async(req,res)=> {
     const schools = await School.findAll({
   
     });
-    res.render("school" ,{ data:schools })
-    console.log(JSON.stringify(schools, null, 2)); 
+    res.render("schoolPages/school" ,{ data:schools })
+   
   } 
   catch (error) {
-    console.error('Error fetching schools with details:', error);
+    // console.error('Error fetching schools with details:', error);
   }
 }
 
@@ -21,51 +21,48 @@ const  deleteSchool =async(req,res)=>{
 
   try {
     const id=req.params.id;
-    console.log(id);
+    // console.log(id);
     let data = await School.destroy({
         where: {
             id: id
         }
     });
-    console.log(data);
+    // console.log(data);
     if (data === 1) {
-      const schools = await School.findAll({
-  
-      });
-        return res.status(200).render('school', {data:schools})
+      return res.status(200).redirect('/school/display')
     }
-    return res.status(200).render('school')
+    return res.status(200).render('schoolPages/school')
 } catch (error) {
-  console.log(error);
+  // console.log(error);
 
 }}
 
 const addSchool=async(req,res)=>{
-  res.render('addSchool')
+  res.render('schoolPages/addSchool')
 }
 
 const   newSchool =async(req,res)=>{
   try {
-    await School.create(req.body)
-    const schools = await School.findAll({
-  
-    });
-    res.render("school" ,{ data:schools })
+    await School.create(req.body).then(() => {
+    return res.status(200).redirect('/school/display')
+      
+    })
+   
   
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     
   }
 }
 const updateSchool=async(req,res)=>{
   const id=req.params.id;
-  console.log(id);
+  // console.log(id);
   let data = await School.findOne({
       where: {
           id: id
       }
   });
-  res.render('updateSchool' ,{data :data} )
+  res.render('schoolPages/updateSchool' ,{data :data} )
 }
 
 
@@ -78,10 +75,7 @@ const id = req.body.id;
     where:{id:id}
   }
   )
-  const schools = await School.findAll({
-  
-  });
-  res.render("school" ,{ data:schools })
+  return res.status(200).redirect('/school/display')
 
 }
 // search 
@@ -98,11 +92,11 @@ const   search= async (req, res) => {
         }
     });
     
-        res.render('school', {
+        res.render('schoolPages/school', {
             data: data
         });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
         res.status(500).send('Error fetching data');
     }
 }

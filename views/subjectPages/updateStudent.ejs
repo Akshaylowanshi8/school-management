@@ -9,7 +9,7 @@
 
 
 </head>
-<%- include("include/header");-%>
+<%- include("../include/header");-%>
 <body>
 <style>
 .form {
@@ -151,31 +151,46 @@
 
 <div   style="display:flex ; height: auto; justify-content: center;">
 
-<form class="form"  method="post" action="/school/saveUpdate">
 
-    <p class="title">update school   </p>
+
+<form class="form"  method="post" action="/student/saveUpdateStudent">
+    <p class="title">update student   </p>
+    <div class="flex">
         <label>
-            <input class="id" type="text" name="id" placeholder="" value="<%=data.id%>" required="">
-            <input class="input" type="text" name="schoolName" placeholder="" value="<%=data.schoolName%>" required="">
-            <span>School Name</span>
+            <input type="text" name="id" value="<%=Alldata.id%>">
+            <input class="input" type="text" placeholder="" name="firstName" value="<%=Alldata.firstName %>" required="">
+            <span>Firstname</span>
         </label>
-    
+
+        <label>
+            <input class="input" type="text" value="<%= Alldata.lastName %>" placeholder="" name="lastName" required="">
+            <span>Lastname</span>
+        </label>
+    </div>  
             
     <label>
-        <input class="input" type="email" name="schoolEmail" value="<%=data.schoolEmail%>"  placeholder="" required="">
+        <input class="input" type="email" value="<%=Alldata.email%>" name="email" placeholder="" required="">
         <span>Email</span>
     </label> 
         
     <label>
-        <input class="input" type="text" name="address" value="<%=data.address%>"  placeholder="" required="">
+        <input class="input" type="text" value="<%=Alldata.address%>" name="address" placeholder="" required="">
         <span>Address</span>
     </label>
-    <label>
-        <input class="input" type="text" name="phoneNumber" value="<%=data.phoneNumber%>"  placeholder="" required="">
-        <span>PhoneNumber</span>
-    </label>
+   
+   
+    <label for="cars"> your old School is "<%=Alldata.School.schoolName%>" Choose a schoolName</label>
+     
+
+        <select name="schoolId" id="schoolId">
+                 <%data.forEach((e) => {%>
+                <option value="<%=e.id%>"><%=e.schoolName%></option>
+                 <% }) %>
+          </select>
+      
+
     <button class="submit" type="submit">Submit</button>
-    <p class="signin"> <a href="/school/display">Back</a> </p>
+    <p class="signin"> <a href="/student/display">Back</a> </p>
 </form>
 
     

@@ -31,8 +31,7 @@ const addManagement=async(req,res)=>{
     const subjectData= await Subject.findAll()
     const classData= await Class.findAll()
     const TeacherData= await Teacher.findAll()
-
-
+    
     res.render('addManagement',{   
         schoolData  : schoolData,
         subjectData : subjectData,
@@ -47,26 +46,10 @@ const addManagement=async(req,res)=>{
 
 const newManagement=async(req,res)=>{
     try {
-     const data=   await  Manage.create(req.body)
+     const data=  await  Manage.create(req.body)
 if(data){
-    const data=await Manage.findAll(  {
-        include:[{
-            model:School,
-            
-        }, {
-            model:Class,
-            
-        },{
-            model:Teacher,
-            
-        }, {
-            model:Subject,
-            
-        },]
-    })
-res.render('home'
-,{data:data}
-)
+   
+    res.redirect('/system/home')
 }
 
 } catch (error) {
@@ -75,7 +58,7 @@ res.render('home'
 }
 const search = async (req, res) => {
     const searchQuery = req.body.search;
-    console.log('Search Query:', searchQuery); // Log the search query
+    // console.log('Search Query:', searchQuery); // Log the search query
 
 
     try {
@@ -103,11 +86,11 @@ const search = async (req, res) => {
             ]
         });
 
-        console.log('Search Results:', data); // Log the results
+        // console.log('Search Results:', data); // Log the results
 
         res.render('home', { data });
     } catch (error) {
-        console.error('Error during search:', error);
+        // console.error('Error during search:', error);
         res.status(500).send('Internal Server Error');
     }
 };
@@ -124,27 +107,12 @@ const deleteManagement =async(req,res)=>{
                   id: id
               }
           });
-          console.log(data);
+        //   console.log(data);
           if (data === 1) {
 
-            const data=await Manage.findAll(  {
-                include:[{
-                    model:School,
-                    
-                }, {
-                    model:Class,
-                    
-                },{
-                    model:Teacher,
-                    
-                }, {
-                    model:Subject,
-                    
-                },]
-            })
-    res.render('home'
-        ,{data:data}
-    ) }
+    res.redirect('/system/home')
+          
+}
     
       } catch (error) {
         console.log(error); 
